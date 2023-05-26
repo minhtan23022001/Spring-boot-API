@@ -38,6 +38,11 @@ public class QuestionService {
     public Question update(Question question) {
         Question existingQuestion = questionRepository.findById(question.getId()).orElse(question);
         existingQuestion.setNameQuestion(question.getNameQuestion());
+        existingQuestion.setAnswerA(question.getAnswerA());
+        existingQuestion.setAnswerB(question.getAnswerB());
+        existingQuestion.setAnswerC(question.getAnswerC());
+        existingQuestion.setAnswerD(question.getAnswerD());
+        existingQuestion.setAnswerQuestion(question.getAnswerQuestion());
         return questionRepository.save(existingQuestion);
     }
 

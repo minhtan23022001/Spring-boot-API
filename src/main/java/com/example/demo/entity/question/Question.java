@@ -19,8 +19,17 @@ public class Question {
     private Long id;
     @Column(name = "question", nullable = false, length = 500)
     private String nameQuestion;
-    @Column(name = "correct_option", nullable = false, length = 5)
-    private String correctOption;
+    @Column(name = "answerA", nullable = false, length = 100)
+    private String answerA;
+    @Column(name = "answerB", nullable = false, length = 100)
+    private String answerB;
+    @Column(name = "answerC", nullable = false, length = 100)
+    private String answerC;
+    @Column(name = "answerD", nullable = false, length = 100)
+    private String answerD;
+    @Column(name = "answerQuestion", nullable = false, length = 100)
+    private String answerQuestion;
+
 
 //    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 //    @JoinColumn(name = "question_id")
