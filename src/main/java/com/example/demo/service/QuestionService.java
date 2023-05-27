@@ -7,9 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.lang.reflect.Array;
+import java.util.*;
 
 @Service
 public class QuestionService {
@@ -28,19 +27,30 @@ public class QuestionService {
         return questionRepository.findAll();
     }
 
+    Long randomId;
     public List<Question> setOfQuestion() {
         Random random = new Random();
-        List<Question> soq = new ArrayList<Question>();
-
-        for(int i = 0; i<15; i++) {
-            int rdQuestion = random.nextInt(30)+1;
-            Long rd = Long.valueOf(rdQuestion);
-            soq.add(getQuestionById(rd));
-            Long id = Long.valueOf(i+1);
-            soq.get(i).setId(id);
+        ArrayList<Question> soq1 = new ArrayList<Question>();
+        ArrayList<Question> soq2 = new ArrayList<Question>();
+        Long temp = 1L;
+        long size = questionRepository.count();
+        int count = (int) size;
+        for(int i = 0; i < count; i++) {
+            Long l = Long.valueOf(i)+1;
+            soq1.add(getQuestionById(l));
         }
-        return soq;
+        Collections.shuffle(soq1);
+
+        for(int i = 0; i < 15; i++) {
+            soq2.add(soq1.get(i));
+        }
+        for(int i = 0; i < 15; i++) {
+            Long l = Long.valueOf(i)+1;
+            soq2.get(i).setId(l);
+        }
+        return soq2;
     }
+
 
     public Question getQuestionById(Long id) {
         return questionRepository.findById(id).orElse(null);
