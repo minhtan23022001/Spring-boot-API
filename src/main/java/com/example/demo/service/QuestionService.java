@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class QuestionService {
@@ -26,6 +28,20 @@ public class QuestionService {
         return questionRepository.findAll();
     }
 
+    public List<Question> setOfQuestion() {
+        Random random = new Random();
+        List<Question> soq = new ArrayList<Question>();
+
+        for(int i = 0; i<15; i++) {
+            int rdQuestion = random.nextInt(30)+1;
+            Long rd = Long.valueOf(rdQuestion);
+            soq.add(getQuestionById(rd));
+            Long id = Long.valueOf(i+1);
+            soq.get(i).setId(id);
+        }
+        return soq;
+    }
+
     public Question getQuestionById(Long id) {
         return questionRepository.findById(id).orElse(null);
     }
@@ -35,8 +51,8 @@ public class QuestionService {
         return "Question deleted " + id + "!";
     }
 
-    public Question update(Question question) {
-        Question existingQuestion = questionRepository.findById(question.getId()).orElse(question);
+    public Question update(Question question, Long id) {
+        Question existingQuestion = questionRepository.findById(id).orElse(question);
         existingQuestion.setNameQuestion(question.getNameQuestion());
         existingQuestion.setAnswerA(question.getAnswerA());
         existingQuestion.setAnswerB(question.getAnswerB());

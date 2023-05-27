@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("question/")
 public class QuestionController {
     @Autowired
     private QuestionService questionService;
@@ -28,14 +29,19 @@ public class QuestionController {
         return questionService.getAllQuestion();
     }
 
+    @GetMapping("/setOfQuestions")
+    public List<Question> setOfQuestions() {
+        return questionService.setOfQuestion();
+    }
+
     @GetMapping("/question/{id}")
     public Question findQuestionById(@PathVariable Long id) {
         return questionService.getQuestionById(id);
     }
 
-    @PutMapping("/update")
-    public Question updateQuestion(@RequestBody Question question) {
-        return questionService.update(question);
+    @PutMapping("/update/{id}")
+    public Question updateQuestion(@RequestBody Question question, @PathVariable Long id) {
+        return questionService.update(question,id);
     }
 
     @DeleteMapping("/delete/{id}")
