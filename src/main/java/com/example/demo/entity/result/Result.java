@@ -18,11 +18,10 @@ public class Result {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "total_question", nullable = false)
-    private Integer totalQuestion;
-    @Column(name = "total_correct", nullable = false)
-    private Integer totalCorrect;
-    @Column(name = "created_at", nullable = false, updatable = false)
-    @CreationTimestamp
-    private Timestamp createdAt;
+    @Column(name = "total_correct_question", nullable = false)
+    private Integer totalCorrectQuestion;
+    @Column(name = "total_money", nullable = false)
+    private Integer totalMoney;
+
+
 }
