@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("api/user")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -38,5 +38,15 @@ public class UserController {
     @GetMapping("/getUsers")
     public List<User> findAllUsers() {
         return userService.getAllUsers();
+    }
+
+    @GetMapping("/getUser/{id}")
+    public User findUserById(@PathVariable Long id) {
+        return userService.getUser(id);
+    }
+
+    @DeleteMapping ("/delete/{id}")
+    public String deleteUserById(@PathVariable Long id) {
+        return userService.deleteUserById(id);
     }
 }

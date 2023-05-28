@@ -2,7 +2,6 @@ package com.example.demo.service;
 
 import com.example.demo.dto.LoginDto;
 import com.example.demo.dto.UserDto;
-import com.example.demo.entity.question.Question;
 import com.example.demo.entity.user.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.response.LoginResponse;
@@ -63,4 +62,12 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public User getUser(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
+    public String deleteUserById(Long id) {
+        userRepository.deleteById(id);
+        return "User deleted" + id + "!";
+    }
 }
