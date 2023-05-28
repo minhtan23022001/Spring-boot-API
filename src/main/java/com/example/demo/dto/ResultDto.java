@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+import com.example.demo.entity.user.User;
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,5 +16,5 @@ public class ResultDto {
     private Long id;
     private Integer totalCorrectQuestion;
     private Integer totalMoney;
-
+    private User user;
 }

@@ -21,18 +21,22 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public String addUser(UserDto userDto) {
-
+        User userFind = userRepository.findByUserName(userDto.getUserName());
+        if(userFind != null){
+            return "Tên tài khoản đã tồn tại";
+        }
         User user = new User(
                 userDto.getUserId(),
                 userDto.getUserName(),
                 userDto.getEmail(),
                 this.passwordEncoder.encode(userDto.getPassword()),
-                userDto.getRole()
+                userDto.getRole(),
+                userDto.getResults()
         );
 
         userRepository.save(user);
 
-        return user.getUserName();
+        return "Đã tạo user " + user.getUserName();
     }
     UserDto userDto;
 

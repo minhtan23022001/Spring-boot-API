@@ -1,5 +1,6 @@
 package com.example.demo.entity.result;
 
+import com.example.demo.entity.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,5 +24,8 @@ public class Result {
     @Column(name = "total_money", nullable = false)
     private Integer totalMoney;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "u_id")
+    private User user;
 
 }

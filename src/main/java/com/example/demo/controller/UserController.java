@@ -20,9 +20,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserRepository userRepository;
-
     @PostMapping("/save")
     public String saveUser(@RequestBody UserDto userDto) {
         String id = userService.addUser(userDto);
