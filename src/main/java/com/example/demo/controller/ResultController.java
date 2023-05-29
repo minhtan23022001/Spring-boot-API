@@ -33,6 +33,9 @@ public class ResultController {
     @PostMapping("/addResult")
     public Result addResult(@RequestBody Result result) {
         return resultService.addResult(result);
+    }@PostMapping("/addResults")
+    public List<Result> addResults(@RequestBody List<Result> result) {
+        return resultService.addAllResult(result);
     }
 
 

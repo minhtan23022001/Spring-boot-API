@@ -14,11 +14,12 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue
+    @Column(name = "user_id")
     private Long userId;
     @Column(name = "username", nullable = false, length = 100)
     private String userName;
@@ -29,8 +30,8 @@ public class User {
     @Column(name = "role", length = 100)
     private String role;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Result> results = new ArrayList<>();
-
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="fk_user_id", referencedColumnName = "user_id")
+    private List<Result> result = new ArrayList<>();
 
 }

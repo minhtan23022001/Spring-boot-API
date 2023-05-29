@@ -2,13 +2,16 @@ package com.example.demo.service;
 
 import com.example.demo.dto.LoginDto;
 import com.example.demo.dto.UserDto;
+import com.example.demo.entity.result.Result;
 import com.example.demo.entity.user.User;
+import com.example.demo.repository.ResultRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.response.LoginResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,18 +23,21 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public String addUser(UserDto userDto) {
-        User userFind = userRepository.findByUserName(userDto.getUserName());
+    @Autowired
+    private ResultRepository resultRepository;
+
+    public String addUser(User userr) {
+        User userFind = userRepository.findByUserName(userr.getUserName());
         if(userFind != null){
             return "Tên tài khoản đã tồn tại";
         }
         User user = new User(
-                userDto.getUserId(),
-                userDto.getUserName(),
-                userDto.getEmail(),
-                this.passwordEncoder.encode(userDto.getPassword()),
-                userDto.getRole(),
-                userDto.getResults()
+                userr.getUserId(),
+                userr.getUserName(),
+                userr.getEmail(),
+                this.passwordEncoder.encode(userr.getPassword()),
+                userr.getRole(),
+                userr.getResult()
         );
 
         userRepository.save(user);
@@ -73,5 +79,15 @@ public class UserService {
     public String deleteUserById(Long id) {
         userRepository.deleteById(id);
         return "User deleted" + id + "!";
+    }
+    public User userAddResult(List<Result> result, Long id) {
+        getUser(id).setResult(result);
+        result = new ArrayList<Result>();
+        for(int i = 0; i < result.size(); i++) {
+            result.get(i).setUserName(getUser(id).getUserName());
+        }
+        resultRepository.saveAll(result);
+        userRepository.save(getUser(id));
+        return getUser(id);
     }
 }

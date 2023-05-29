@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class ResultService {
     @Autowired
     private ResultRepository resultRepository;
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+
 
     public List<Result> getAllResult() {
         return resultRepository.findAll();
@@ -57,5 +57,9 @@ public class ResultService {
 
     public Result addResult(Result result) {
         return resultRepository.save(result);
+    }
+    public List<Result> addAllResult(List<Result> results)
+    {
+        return resultRepository.saveAll(results);
     }
 }

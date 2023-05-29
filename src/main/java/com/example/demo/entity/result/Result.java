@@ -16,16 +16,15 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 public class Result {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @GeneratedValue
     private Long id;
     @Column(name = "total_correct_question", nullable = false)
     private Integer totalCorrectQuestion;
     @Column(name = "total_money", nullable = false)
     private Integer totalMoney;
+    private String userName;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "u_id")
-    private User user;
-
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
+//    private User user1;
 }

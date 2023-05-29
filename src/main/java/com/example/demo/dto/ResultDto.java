@@ -16,5 +16,5 @@ public class ResultDto {
     private Long id;
     private Integer totalCorrectQuestion;
     private Integer totalMoney;
-    private User user;
+    private String userName;
 }

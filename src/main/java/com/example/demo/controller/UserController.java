@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.LoginDto;
 import com.example.demo.dto.UserDto;
+import com.example.demo.entity.result.Result;
 import com.example.demo.entity.user.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.response.LoginResponse;
@@ -21,9 +22,15 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/save")
-    public String saveUser(@RequestBody UserDto userDto) {
-        String id = userService.addUser(userDto);
+    public String saveUser(@RequestBody User user) {
+        String id = userService.addUser(user);
         return id;
+    }
+
+    @PutMapping ("/saveResult/{id}")
+    public User saveResult(@RequestBody List<Result> result, @PathVariable Long id) {
+        userService.userAddResult(result, id);
+        return userService.getUser(id);
     }
 
     @PostMapping("/login")

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -16,6 +17,6 @@ public class UserDto {
     private String email;
     private String password;
     private String role;
-    private List<Result> results;
+    private List<Result> results = new ArrayList<>();
 
 }
